@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Addisalem Mengistu | IETP Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #060e1e; color: #e2eaf6; line-height: 1.7; overflow-x: hidden; }
+
+    /* ── Variables ── */
+    :root {
+      --navy: #060e1e;
+      --navy2: #0b1829;
+      --navy3: #0f2040;
+      --card: #0d1b33;
+      --border: rgba(0,200,255,0.13);
+      --cyan: #00c8ff;
+      --cyan2: #0099cc;
+      --text: #e2eaf6;
+      --text2: #7fa8cc;
+      --text3: #3d6080;
+      --green: #10b981;
+      --gold: #f59e0b;
+      --radius: 14px;
+    }
+    body.light {
+      background: #f0f5ff;
+      color: #0b1829;
+      --navy: #f0f5ff;
+      --navy2: #e4edf9;
+      --navy3: #d8e7f8;
+      --card: #ffffff;
+      --border: rgba(10,50,120,0.12);
+      --text: #0b1829;
+      --text2: #2d5580;
+      --text3: #6699bb;
+    }
+
+    /* ── Utility ── */
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 22px; }
+    .section { padding: 90px 0; }
+    .sec-tag { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cyan); margin-bottom: 10px; }
+    .sec-title { font-size: clamp(1.7rem,4vw,2.6rem); font-weight: 800; color: var(--text); margin-bottom: 14px; line-height: 1.2; }
+    .sec-sub { color: var(--text2); font-size: 1rem; max-width: 580px; margin-bottom: 50px; }
+    .cyan { color: var(--cyan); }
+    .btn { display: inline-flex; align-items: center; gap: 7px; padding: 13px 26px; border-radius: 50px; font-weight: 600; font-size: .9rem; text-decoration: none; border: none; cursor: pointer; transition: all .25s; }
+    .btn-primary { background: linear-gradient(135deg,var(--cyan),var(--cyan2)); color: #000; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,200,255,.35); }
+    .btn-outline { background: transparent; color: var(--text); border: 1.5px solid var(--border); }
+    .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-2px); }
+    .btn-sm { padding: 9px 18px; font-size: .82rem; }
+    .tag { display: inline-block; background: rgba(0,200,255,.1); color: var(--cyan); border: 1px solid rgba(0,200,255,.2); border-radius: 50px; padding: 3px 11px; font-size: .75rem; font-weight: 600; }
+    .badge-plan { background: rgba(245,158,11,.13); color: var(--gold); border: 1px solid rgba(245,158,11,.3); border-radius: 50px; padding: 3px 11px; font-size: .75rem; font-weight: 600; }
+    .badge-on  { background: rgba(0,200,255,.12); color: var(--cyan); border: 1px solid rgba(0,200,255,.25); border-radius: 50px; padding: 3px 11px; font-size: .75rem; font-weight: 600; }
+    .badge-done{ background: rgba(16,185,129,.12); color: var(--green); border: 1px solid rgba(16,185,129,.3); border-radius: 50px; padding: 3px 11px; font-size: .75rem; font-weight: 600; }
+    .divider { height: 1px; background: var(--border); }
+
+    /* ── Animations ── */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:none; } }
+    @keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.4} }
+    @keyframes arrowBounce { 0%,100%{transform:rotate(45deg) translate(0,0)} 50%{transform:rotate(45deg) translate(3px,3px)} }
+    .fade-up { opacity:0; animation: fadeUp .65s forwards; }
+    .d1{animation-delay:.1s} .d2{animation-delay:.22s} .d3{animation-delay:.34s} .d4{animation-delay:.46s} .d5{animation-delay:.58s}
+    .reveal { opacity:0; transform:translateY(32px); transition: opacity .6s, transform .6s; }
+    .reveal.in { opacity:1; transform:none; }
+
+    /* ── Navbar ── */
+    #nav { position:fixed; top:0; left:0; right:0; z-index:900; padding:16px 0; transition: all .3s; }
+    #nav.scrolled { background: rgba(6,14,30,.93); backdrop-filter:blur(18px); border-bottom:1px solid var(--border); padding:11px 0; }
+    body.light #nav.scrolled { background: rgba(240,245,255,.93); }
+    .nav-wrap { display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .logo { font-size:1.4rem; font-weight:900; color:var(--text); text-decoration:none; letter-spacing:-1px; }
+    .nav-links { display:flex; list-style:none; gap:4px; align-items:center; }
+    .nav-links a { color:var(--text2); text-decoration:none; font-size:.83rem; font-weight:500; padding:6px 10px; border-radius:8px; transition:all .2s; }
+    .nav-links a:hover, .nav-links a.active { color:var(--cyan); background:rgba(0,200,255,.08); }
+    .nav-right { display:flex; gap:8px; align-items:center; }
+    .icon-btn { background:none; border:1px solid var(--border); color:var(--text2); width:34px; height:34px; border-radius:8px; cursor:pointer; font-size:.95rem; display:flex; align-items:center; justify-content:center; transition:all .2s; }
+    .icon-btn:hover { border-color:var(--cyan); color:var(--cyan); }
+    .hamburger { display:none; }
+    @media(max-width:820px){ .nav-links{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--navy);border-bottom:1px solid var(--border);padding:14px 22px;gap:2px;} .nav-links.open{display:flex;} .hamburger{display:flex;} }
+
+    /* ── Hero ── */
+    .hero { min-height:100vh; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; padding-top:80px; }
+    .hero-bg { position:absolute; inset:0; pointer-events:none; }
+    .orb { position:absolute; border-radius:50%; filter:blur(90px); opacity:.22; }
+    .orb1 { width:480px; height:480px; background:radial-gradient(circle,#00c8ff,#0b2a6e); top:-120px; right:-100px; animation:floatY 9s ease-in-out infinite; }
+    .orb2 { width:360px; height:360px; background:radial-gradient(circle,#6d28d9,#060e1e); bottom:-80px; left:-60px; animation:floatY 11s ease-in-out infinite 1.5s; }
+    .grid-lines { position:absolute; inset:0; background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px); background-size:56px 56px; opacity:.6; }
+    .hero-inner { position:relative; z-index:2; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+    .hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(0,200,255,.1); border:1px solid rgba(0,200,255,.22); border-radius:50px; padding:7px 16px; font-size:.77rem; font-weight:600; color:var(--cyan); margin-bottom:22px; }
+    .badge-dot { width:7px; height:7px; background:var(--cyan); border-radius:50%; animation:blink 2s infinite; }
+    .hero-title { font-size:clamp(2rem,5vw,3.4rem); font-weight:900; line-height:1.12; letter-spacing:-1.5px; margin-bottom:20px; }
+    .grad { background:linear-gradient(135deg,var(--cyan),#a78bfa,var(--cyan2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .hero-desc { color:var(--text2); font-size:1rem; margin-bottom:30px; max-width:480px; }
+    .hero-chips { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:32px; }
+    .hero-chip { display:flex; align-items:center; gap:8px; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:10px 15px; font-size:.82rem; color:var(--text); }
+    .hero-chip strong { display:block; font-size:.88rem; }
+    .hero-chip span { color:var(--text2); font-size:.75rem; }
+    .hero-btns { display:flex; flex-wrap:wrap; gap:10px; }
+    .hero-img-wrap { position:relative; }
+    .hero-img { width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:24px; border:2px solid var(--border); box-shadow:0 0 60px rgba(0,200,255,.15); }
+    .hero-img-badge { position:absolute; bottom:24px; left:-20px; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:12px 16px; backdrop-filter:blur(10px); }
+    .hero-img-badge strong { display:block; font-size:.85rem; color:var(--text); }
+    .hero-img-badge span { font-size:.75rem; color:var(--text2); }
+    .hero-scroll { position:absolute; bottom:28px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:7px; color:var(--text3); font-size:.72rem; z-index:2; }
+    .arrow-down { width:16px; height:16px; border-right:2px solid var(--text3); border-bottom:2px solid var(--text3); transform:rotate(45deg); animation:arrowBounce 1.6s infinite; }
+    @media(max-width:768px){ .hero-inner{grid-template-columns:1fr;} .hero-img-wrap{display:none;} }
+
+    /* ── About ── */
+    .about-grid { display:grid; grid-template-columns:1fr 1.3fr; gap:56px; align-items:start; }
+    .about-img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:20px; border:2px solid var(--border); box-shadow:0 0 40px rgba(0,200,255,.12); }
+    .about-img-wrap { position:relative; }
+    .about-img-tag { position:absolute; bottom:16px; right:-16px; background:linear-gradient(135deg,var(--cyan),var(--cyan2)); color:#000; font-weight:700; font-size:.78rem; padding:8px 14px; border-radius:10px; }
+    .about-text p { color:var(--text2); margin-bottom:15px; font-size:.97rem; }
+    .skills-cats { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:28px; }
+    .sk-cat { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; }
+    .sk-cat-name { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--cyan); margin-bottom:9px; }
+    .sk-tags { display:flex; flex-wrap:wrap; gap:5px; }
+    .sk-tag { background:var(--navy3); color:var(--text2); border:1px solid var(--border); border-radius:5px; padding:2px 9px; font-size:.75rem; }
+    @media(max-width:768px){ .about-grid{grid-template-columns:1fr;} }
+
+    /* ── Project ── */
+    .project-section { background:var(--navy2); }
+    .proj-header { background:linear-gradient(135deg,var(--navy3),var(--card)); border:1px solid var(--border); border-radius:var(--radius); padding:40px; margin-bottom:36px; }
+    .proj-header h3 { font-size:clamp(1.1rem,2.5vw,1.55rem); font-weight:800; color:var(--text); margin-bottom:14px; line-height:1.35; }
+    .proj-header p { color:var(--text2); font-size:.97rem; line-height:1.8; }
+    .proj-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; }
+    .proj-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:24px; transition:all .3s; }
+    .proj-card:hover { border-color:rgba(0,200,255,.3); transform:translateY(-4px); }
+    .proj-card-ico { font-size:1.8rem; margin-bottom:13px; }
+    .proj-card h4 { font-size:.95rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .proj-card p { font-size:.86rem; color:var(--text2); line-height:1.6; }
+    .proj-img-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:36px; }
+    .proj-img { width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:var(--radius); border:1px solid var(--border); }
+    .proj-img-cap { font-size:.78rem; color:var(--text3); text-align:center; margin-top:6px; }
+    @media(max-width:600px){ .proj-img-row{grid-template-columns:1fr;} }
+
+    /* ── My Role ── */
+    .role-intro { background:linear-gradient(135deg,rgba(0,200,255,.06),rgba(0,0,0,0)); border:1px solid var(--border); border-left:4px solid var(--cyan); border-radius:var(--radius); padding:28px 32px; margin-bottom:40px; }
+    .role-intro p { color:var(--text2); font-size:.97rem; line-height:1.8; }
+    .role-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; }
+    .role-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:26px; transition:all .3s; }
+    .role-card:hover { border-color:rgba(0,200,255,.3); transform:translateY(-3px); box-shadow:0 0 28px rgba(0,200,255,.1); }
+    .role-card-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:13px; gap:10px; }
+    .role-card-ico { font-size:1.7rem; }
+    .role-card h3 { font-size:.95rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .role-card p { font-size:.85rem; color:var(--text2); line-height:1.6; margin-bottom:12px; }
+    .role-techs { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:13px; }
+    .role-note { background:var(--navy3); border:1px dashed var(--border); border-radius:8px; padding:9px 13px; font-size:.78rem; color:var(--text3); }
+
+    /* ── Journal ── */
+    .journal-section { background:var(--navy2); }
+    .journal-top { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; margin-bottom:40px; }
+    .timeline { position:relative; display:flex; flex-direction:column; gap:0; }
+    .timeline::before { content:''; position:absolute; left:23px; top:0; bottom:0; width:2px; background:linear-gradient(to bottom,var(--cyan),transparent); }
+    .tl-entry { display:flex; gap:22px; padding:22px 0; }
+    .tl-dot { min-width:46px; height:46px; background:var(--card); border:2px solid var(--cyan); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.75rem; font-weight:800; color:var(--cyan); z-index:1; position:relative; flex-shrink:0; }
+    .tl-body { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:22px; flex:1; transition:border-color .3s; }
+    .tl-body:hover { border-color:rgba(0,200,255,.25); }
+    .tl-meta { display:flex; align-items:center; gap:10px; margin-bottom:11px; flex-wrap:wrap; }
+    .tl-week { background:rgba(0,200,255,.1); color:var(--cyan); border-radius:50px; padding:2px 10px; font-size:.72rem; font-weight:700; }
+    .tl-date { font-size:.78rem; color:var(--text3); }
+    .tl-body h3 { font-size:.97rem; font-weight:700; color:var(--text); margin-bottom:10px; }
+    .tl-row { margin-top:12px; }
+    .tl-row-label { font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--text3); margin-bottom:5px; }
+    .tl-row p { font-size:.86rem; color:var(--text2); }
+    .tl-actions { display:flex; gap:8px; margin-top:15px; padding-top:15px; border-top:1px solid var(--border); }
+    .tl-btn { background:none; border:1px solid var(--border); color:var(--text3); padding:5px 13px; border-radius:6px; font-size:.76rem; cursor:pointer; transition:all .2s; }
+    .tl-btn:hover { border-color:var(--cyan); color:var(--cyan); }
+    .tl-btn.del:hover { border-color:#ef4444; color:#ef4444; }
+    .empty-journal { text-align:center; padding:60px 20px; color:var(--text3); }
+    .empty-journal .ei { font-size:3rem; margin-bottom:14px; }
+
+    /* ── Gallery ── */
+    .gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; }
+    .gal-item { border-radius:var(--radius); overflow:hidden; aspect-ratio:4/3; position:relative; cursor:pointer; }
+    .gal-item img { width:100%; height:100%; object-fit:cover; transition:transform .4s; }
+    .gal-item:hover img { transform:scale(1.07); }
+    .gal-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(6,14,30,.85),transparent 60%); opacity:0; transition:opacity .3s; display:flex; align-items:flex-end; padding:16px; }
+    .gal-item:hover .gal-overlay { opacity:1; }
+    .gal-caption { color:#fff; font-size:.82rem; font-weight:600; }
+
+    /* ── Skills ── */
+    .skills-section { background:var(--navy2); }
+    .skills-split { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; }
+    .skill-bars { display:flex; flex-direction:column; gap:18px; }
+    .sb-head { display:flex; justify-content:space-between; margin-bottom:7px; }
+    .sb-name { font-size:.88rem; font-weight:600; color:var(--text); }
+    .sb-pct { font-size:.8rem; color:var(--text3); }
+    .sb-track { height:7px; background:var(--navy3); border-radius:50px; overflow:hidden; }
+    .sb-fill { height:100%; background:linear-gradient(90deg,var(--cyan),var(--cyan2)); border-radius:50px; width:0; transition:width 1.2s ease; }
+    .soft-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .soft-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; display:flex; align-items:center; gap:12px; }
+    .soft-ico { font-size:1.5rem; }
+    .soft-card strong { display:block; font-size:.85rem; color:var(--text); }
+    .soft-card span { font-size:.76rem; color:var(--text3); }
+    @media(max-width:768px){ .skills-split{grid-template-columns:1fr;} .soft-grid{grid-template-columns:1fr;} }
+
+    /* ── Contact ── */
+    .contact-grid { display:grid; grid-template-columns:1fr 1.2fr; gap:48px; align-items:start; }
+    .contact-links { display:flex; flex-direction:column; gap:12px; margin-top:24px; }
+    .clink { display:flex; align-items:center; gap:13px; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px 17px; text-decoration:none; color:var(--text); transition:all .3s; }
+    .clink:hover { border-color:var(--cyan); color:var(--cyan); transform:translateX(5px); }
+    .clink-ico { font-size:1.25rem; }
+    .clink strong { display:block; font-size:.86rem; }
+    .clink span { font-size:.78rem; color:var(--text3); }
+    .cform { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:30px; }
+    .cform h3 { font-size:1rem; font-weight:700; margin-bottom:18px; }
+    .fg { margin-bottom:15px; }
+    .fl { display:block; font-size:.8rem; font-weight:600; color:var(--text2); margin-bottom:5px; }
+    .fi, .fta { width:100%; background:var(--navy2); border:1px solid var(--border); border-radius:8px; padding:10px 13px; color:var(--text); font-family:inherit; font-size:.88rem; transition:all .2s; }
+    .fi:focus, .fta:focus { outline:none; border-color:var(--cyan); box-shadow:0 0 0 3px rgba(0,200,255,.1); }
+    .fta { min-height:100px; resize:vertical; }
+    .fsuccess { display:none; background:rgba(16,185,129,.1); border:1px solid rgba(16,185,129,.3); border-radius:9px; padding:12px; color:var(--green); font-size:.87rem; text-align:center; margin-top:12px; }
+    @media(max-width:768px){ .contact-grid{grid-template-columns:1fr;} }
+
+    /* ── Footer ── */
+    footer { background:var(--navy2); border-top:1px solid var(--border); padding:40px 0 24px; }
+    .footer-inner { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+    .footer-inner p { color:var(--text3); font-size:.82rem; }
+    .footer-links { display:flex; gap:20px; }
+    .footer-links a { color:var(--text2); text-decoration:none; font-size:.82rem; transition:color .2s; }
+    .footer-links a:hover { color:var(--cyan); }
+
+    /* ── Modal ── */
+    .modal-bg { position:fixed; inset:0; background:rgba(0,0,0,.75); z-index:2000; display:none; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(4px); }
+    .modal-bg.open { display:flex; }
+    .modal-box { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:32px; width:100%; max-width:580px; max-height:90vh; overflow-y:auto; position:relative; }
+    .modal-box h2 { font-size:1.2rem; font-weight:800; margin-bottom:20px; }
+    .mclose { position:absolute; top:14px; right:14px; background:none; border:1px solid var(--border); color:var(--text2); width:30px; height:30px; border-radius:7px; cursor:pointer; font-size:.9rem; display:flex; align-items:center; justify-content:center; }
+    .mclose:hover { border-color:#ef4444; color:#ef4444; }
+    .mrow { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .mactions { display:flex; gap:10px; justify-content:flex-end; margin-top:20px; }
+
+    /* ── Lightbox ── */
+    .lb-bg { position:fixed; inset:0; background:rgba(0,0,0,.92); z-index:3000; display:none; align-items:center; justify-content:center; }
+    .lb-bg.open { display:flex; }
+    .lb-img { max-width:85vw; max-height:85vh; border-radius:12px; }
+    .lb-close { position:fixed; top:18px; right:22px; background:none; border:1px solid rgba(255,255,255,.25); color:#fff; width:38px; height:38px; border-radius:9px; cursor:pointer; font-size:1.1rem; display:flex; align-items:center; justify-content:center; }
+    .lb-caption { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); color:#fff; font-size:.88rem; background:rgba(0,0,0,.6); padding:8px 18px; border-radius:50px; }
+
+    /* ── Stage banner ── */
+    .stage-banner { display:flex; align-items:flex-start; gap:14px; background:rgba(0,200,255,.07); border:1px solid rgba(0,200,255,.25); border-left:4px solid var(--cyan); border-radius:var(--radius); padding:20px 24px; margin-bottom:32px; }
+    .stage-dot { min-width:10px; height:10px; background:var(--cyan); border-radius:50%; margin-top:6px; animation:blink 2s infinite; }
+    .stage-banner strong { display:block; color:var(--text); font-size:.95rem; margin-bottom:4px; }
+    .stage-banner span { color:var(--text2); font-size:.88rem; }
+
+    /* ── Why box ── */
+    .why-box { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:30px; margin-top:32px; }
+    .why-box h3 { font-size:1rem; font-weight:700; color:var(--text); margin-bottom:12px; }
+    .why-box p { color:var(--text2); font-size:.95rem; line-height:1.8; }
+
+    /* ── Contribution summary cards ── */
+    .contrib-summary { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-bottom:8px; }
+    .cs-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:22px; }
+    .cs-icon { font-size:1.7rem; margin-bottom:12px; }
+    .cs-card h4 { font-size:.9rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .cs-card p { font-size:.84rem; color:var(--text2); line-height:1.6; }
+
+    /* ── Journal hint ── */
+    .journal-hint { display:flex; align-items:center; gap:10px; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:12px 16px; font-size:.84rem; color:var(--text2); }
+
+    /* ── Role category label ── */
+    .role-cat-label { display:flex; align-items:center; gap:14px; background:linear-gradient(90deg,rgba(0,200,255,.08),transparent); border:1px solid var(--border); border-left:4px solid var(--cyan); border-radius:var(--radius); padding:18px 22px; margin-bottom:20px; }
+    .role-cat-icon { font-size:1.8rem; }
+    .role-cat-label strong { display:block; color:var(--text); font-size:.97rem; }
+    .role-cat-label span { color:var(--text2); font-size:.83rem; }
+    .role-cards-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:18px; }
+
+    /* ── Modal divider ── */
+    .modal-divider { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--cyan); margin:18px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="wrap nav-wrap">
+    <a href="#hero" class="logo">AM<span class="cyan">.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#project">Project</a></li>
+      <li><a href="#role">My Role</a></li>
+      <li><a href="#journal">Journal</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button id="themeBtn" class="icon-btn" title="Toggle theme">☀</button>
+      <button id="menuBtn" class="icon-btn hamburger">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="hero-bg">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="grid-lines"></div>
+  </div>
+  <div class="wrap hero-inner">
+    <!-- Left: text -->
+    <div>
+      <div class="hero-badge fade-up d1">
+        <span class="badge-dot"></span>
+        IETP Personal Portfolio &bull; 2026/2027
+      </div>
+      <h1 class="hero-title fade-up d2">
+        Hi, I'm <span class="grad">Addisalem</span><br/>
+        Software Engineer<br/>in the Making.
+      </h1>
+      <p class="hero-desc fade-up d3">
+        4th-year Software Engineering student at AASTU. Passionate about building
+        smart, practical solutions — from web apps to sensor monitoring systems.
+      </p>
+      <div class="hero-chips fade-up d4">
+        <div class="hero-chip">🎓 <div><strong>AASTU</strong><span>Software Engineering</span></div></div>
+        <div class="hero-chip">🎯 <div><strong>Team Coordinator</strong><span>IETP 2026/2027</span></div></div>
+        <div class="hero-chip">💻 <div><strong>SWE Member</strong><span>Sensor & Software</span></div></div>
+      </div>
+      <div class="hero-btns fade-up d5">
+        <a href="#project" class="btn btn-primary">View Our Project</a>
+        <a href="#role" class="btn btn-outline">My Dual Role</a>
+      </div>
+    </div>
+    <!-- Right: image -->
+    <div class="hero-img-wrap fade-up d3">
+      <img
+        src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80"
+        alt="Software engineering — coding on laptop"
+        class="hero-img"
+      />
+      <div class="hero-img-badge">
+        <strong>Addisalem Mengistu</strong>
+        <span>Software Engineering Student</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>scroll</span>
+    <div class="arrow-down"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="wrap">
+    <p class="sec-tag reveal">About Me</p>
+    <h2 class="sec-title reveal">Who I Am</h2>
+    <div class="about-grid">
+      <div class="about-img-wrap reveal">
+        <img
+          src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80"
+          alt="Software development workspace"
+          class="about-img"
+        />
+        <div class="about-img-tag">SWE @ AASTU</div>
+      </div>
+      <div class="reveal">
+        <div class="about-text">
+          <p>
+            I'm <strong style="color:var(--text)">Addisalem Mengistu</strong>, a 4th-year Software Engineering student
+            at <strong class="cyan">Addis Ababa Science and Technology University (AASTU)</strong>. I'm passionate
+            about technology, innovation, and using software to solve real-world problems.
+          </p>
+          <p>
+            Through the <strong style="color:var(--text)">Integrated Engineering Team Project (IETP)</strong>,
+            I'm collaborating with students from five other engineering disciplines to design and build a
+            solar-powered vegetable dryer. I have two roles in this project: <strong class="cyan">Team Coordinator</strong>
+            — organizing meetings, managing communication across disciplines, and keeping the project on track —
+            and <strong class="cyan">Software Engineer</strong> — responsible for the sensor monitoring code,
+            display interface, and fan control logic.
+          </p>
+          <p>
+            Outside of IETP, I enjoy building web and mobile applications, learning new technologies,
+            and exploring how software connects with hardware in real systems. I aim to grow into
+            an engineer who bridges the gap between digital solutions and physical-world impact.
+          </p>
+        </div>
+        <div class="skills-cats">
+          <div class="sk-cat">
+            <div class="sk-cat-name">💻 Programming</div>
+            <div class="sk-tags">
+              <span class="sk-tag">Python</span><span class="sk-tag">Java</span>
+              <span class="sk-tag">C++</span><span class="sk-tag">JavaScript</span>
+            </div>
+          </div>
+          <div class="sk-cat">
+            <div class="sk-cat-name">🌐 Web</div>
+            <div class="sk-tags">
+              <span class="sk-tag">HTML</span><span class="sk-tag">CSS</span><span class="sk-tag">React</span>
+            </div>
+          </div>
+          <div class="sk-cat">
+            <div class="sk-cat-name">📱 Mobile</div>
+            <div class="sk-tags">
+              <span class="sk-tag">Flutter</span><span class="sk-tag">Dart</span>
+            </div>
+          </div>
+          <div class="sk-cat">
+            <div class="sk-cat-name">🛠️ Tools</div>
+            <div class="sk-tags">
+              <span class="sk-tag">Git</span><span class="sk-tag">GitHub</span>
+              <span class="sk-tag">VS Code</span><span class="sk-tag">MySQL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECT -->
+<section id="project" class="section project-section">
+  <div class="wrap">
+    <p class="sec-tag reveal">IETP Project</p>
+    <h2 class="sec-title reveal">Our Chosen Topic</h2>
+    <p class="sec-sub reveal">After a team brainstorming process, we selected this as our IETP project topic.</p>
+
+    <!-- Stage banner -->
+    <div class="stage-banner reveal">
+      <span class="stage-dot"></span>
+      <div>
+        <strong>Current Stage: Topic Selected &amp; Planning</strong>
+        <span>We have chosen our project topic and are now discussing how to approach it, dividing responsibilities, and starting our research phase.</span>
+      </div>
+    </div>
+
+    <div class="proj-header reveal">
+      <h3>"Design and Development of a Passive Thermal-Storage Solar Dryer<br/>with Sensor Monitoring for Small-Scale Vegetable Drying"</h3>
+      <p style="margin-top:14px">
+        Our team chose this topic because post-harvest vegetable loss is a real and common problem for small-scale
+        farmers in Ethiopia. The idea is to build a solar-powered dryer that uses natural sunlight to dry vegetables,
+        reducing spoilage without needing electricity. The dryer will also have temperature and humidity sensors so
+        the drying process can be monitored. As the Software Engineering student on the team, I will be responsible
+        for the sensor monitoring and software side of this system.
+      </p>
+    </div>
+
+    <!-- How we picked the topic -->
+    <div style="margin-bottom:36px">
+      <p class="sec-tag reveal" style="margin-bottom:14px">How We Got Here</p>
+      <div class="proj-cards reveal">
+        <div class="proj-card">
+          <div class="proj-card-ico">🧠</div>
+          <h4>Step 1 — Brainstorming</h4>
+          <p>Each team member proposed ideas related to their discipline. We discussed multiple ideas including
+          water purification, crop storage, and solar energy applications before narrowing down the list.</p>
+        </div>
+        <div class="proj-card">
+          <div class="proj-card-ico">🗳️</div>
+          <h4>Step 2 — Topic Selection</h4>
+          <p>We evaluated each idea based on feasibility, available materials, budget (under 10,000 ETB),
+          and how well it fits all six disciplines. The solar dryer idea was chosen because every discipline
+          has a clear role in it.</p>
+        </div>
+        <div class="proj-card">
+          <div class="proj-card-ico">📋</div>
+          <h4>Step 3 — Planning</h4>
+          <p>Now we are discussing how the project will work, what each discipline is responsible for,
+          and what the timeline looks like. This portfolio documents my personal understanding and
+          contribution as the project develops.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Why this topic -->
+    <div class="why-box reveal">
+      <h3>Why This Project Matters to Me</h3>
+      <p>
+        As a Software Engineering student, I find this project interesting because it combines software with a
+        real physical system. Writing code that controls sensors and a fan in a real dryer is very different from
+        classroom assignments — it has to actually work in the real world. The project also addresses a genuine
+        community problem, which makes the work meaningful. I am still learning about the hardware side, but I am
+        excited to figure out how to connect my software skills to this kind of system.
+      </p>
+    </div>
+
+    <!-- Project images -->
+    <div class="proj-img-row reveal">
+      <div>
+        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=700&q=80"
+          alt="Solar panels" class="proj-img" />
+        <p class="proj-img-cap">Solar energy — the core technology behind our project</p>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80"
+          alt="Vegetables — the beneficiaries" class="proj-img" />
+        <p class="proj-img-cap">Vegetable drying — the problem we are solving</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MY ROLE -->
+<section id="role" class="section">
+  <div class="wrap">
+    <p class="sec-tag reveal">My Personal Contribution</p>
+    <h2 class="sec-title reveal">What I Am Doing in This Project</h2>
+    <p class="sec-sub reveal">
+      This section describes my individual role as a Software Engineering student in the IETP team —
+      what I plan to work on, why, and how it connects to the overall project.
+    </p>
+
+    <!-- Personal statement -->
+    <div class="role-intro reveal">
+      <p>
+        I have <strong style="color:var(--text)">two responsibilities</strong> in this IETP project, not one.
+      </p>
+      <p style="margin-top:12px">
+        First, I am the <strong style="color:var(--cyan)">Team Coordinator</strong>. That means I organize our
+        meetings, keep track of what each person is doing, make sure the six disciplines are communicating
+        with each other, and keep the project moving forward. This is a leadership and management role — it
+        has nothing to do with code, but it is just as important.
+      </p>
+      <p style="margin-top:12px">
+        Second, I am the <strong style="color:var(--cyan)">Software Engineering</strong> member. That means
+        I am responsible for the technical software side of the solar dryer — reading sensor data,
+        displaying it on an LCD, and writing the logic that automatically controls the exhaust fan.
+      </p>
+      <p style="margin-top:12px;color:var(--text2)">
+        We are currently in the early stage — topic selected, roles just assigned, planning underway.
+        Everything below reflects what I am doing now and what I plan to do as the project develops.
+      </p>
+    </div>
+
+    <!-- What I bring to the team -->
+    <div class="contrib-summary reveal">
+      <div class="cs-card">
+        <div class="cs-icon">🎯</div>
+        <h4>As Team Coordinator</h4>
+        <p>I keep the team organized, run our meetings, resolve conflicts between disciplines, and make sure
+        deliverables are submitted on time. Without coordination, six people from six disciplines
+        would pull in six directions.</p>
+      </div>
+      <div class="cs-card">
+        <div class="cs-icon">💻</div>
+        <h4>As Software Engineer</h4>
+        <p>I write the code that makes the dryer "smart" — reading temperature and humidity from sensors,
+        displaying the data, and controlling the fan automatically based on that data.</p>
+      </div>
+      <div class="cs-card">
+        <div class="cs-icon">🌉</div>
+        <h4>The Bridge Between Both</h4>
+        <p>Being both coordinator and SWE helps — I understand the full picture of the project, which
+        makes it easier to define software requirements that match what the hardware team is building.</p>
+      </div>
+    </div>
+
+    <p class="sec-tag reveal" style="margin:40px 0 20px">My Responsibilities — Broken Down</p>
+    <div id="roleCards"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WEEKLY JOURNAL -->
+<section id="journal" class="section journal-section">
+  <div class="wrap">
+    <p class="sec-tag reveal">Weekly Journal</p>
+    <h2 class="sec-title reveal">My Weekly Updates</h2>
+    <p class="sec-sub reveal">
+      Every week I write down what happened in the project, what I personally worked on,
+      what I learned, and what I need to do next. This is my honest record of the process.
+    </p>
+
+    <div class="journal-top reveal">
+      <div class="journal-hint">
+        <span>📌</span>
+        <span>Entries save automatically in your browser — they stay even after you close the page.</span>
+      </div>
+      <button class="btn btn-primary btn-sm" id="addEntryBtn">+ Add This Week's Update</button>
+    </div>
+
+    <div class="timeline" id="timeline">
+      <!-- rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills" class="section skills-section">
+  <div class="wrap">
+    <p class="sec-tag reveal">Skills &amp; Growth</p>
+    <h2 class="sec-title reveal">What I'm Building</h2>
+    <p class="sec-sub reveal">Technical and professional skills I'm developing through IETP and my studies.</p>
+
+    <div class="skills-split">
+      <div class="reveal">
+        <p style="font-weight:700;margin-bottom:20px;color:var(--text)">Technical Skills</p>
+        <div class="skill-bars" id="sbars">
+          <div>
+            <div class="sb-head"><span class="sb-name">Python / Embedded C++</span><span class="sb-pct">70%</span></div>
+            <div class="sb-track"><div class="sb-fill" data-w="70"></div></div>
+          </div>
+          <div>
+            <div class="sb-head"><span class="sb-name">Sensor Integration</span><span class="sb-pct">65%</span></div>
+            <div class="sb-track"><div class="sb-fill" data-w="65"></div></div>
+          </div>
+          <div>
+            <div class="sb-head"><span class="sb-name">Web Development (React)</span><span class="sb-pct">75%</span></div>
+            <div class="sb-track"><div class="sb-fill" data-w="75"></div></div>
+          </div>
+          <div>
+            <div class="sb-head"><span class="sb-name">Mobile Dev (Flutter)</span><span class="sb-pct">68%</span></div>
+            <div class="sb-track"><div class="sb-fill" data-w="68"></div></div>
+          </div>
+          <div>
+            <div class="sb-head"><span class="sb-name">Technical Documentation</span><span class="sb-pct">80%</span></div>
+            <div class="sb-track"><div class="sb-fill" data-w="80"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <p style="font-weight:700;margin-bottom:20px;color:var(--text)">What IETP is Teaching Me</p>
+        <div class="soft-grid">
+          <div class="soft-card"><span class="soft-ico">🤝</span><div><strong>Teamwork</strong><span>Cross-discipline collaboration</span></div></div>
+          <div class="soft-card"><span class="soft-ico">🧩</span><div><strong>Problem Solving</strong><span>Real engineering constraints</span></div></div>
+          <div class="soft-card"><span class="soft-ico">💬</span><div><strong>Communication</strong><span>Technical presentations</span></div></div>
+          <div class="soft-card"><span class="soft-ico">🔬</span><div><strong>Research</strong><span>Literature &amp; design review</span></div></div>
+          <div class="soft-card"><span class="soft-ico">⏱️</span><div><strong>Time Management</strong><span>Milestone planning</span></div></div>
+          <div class="soft-card"><span class="soft-ico">📋</span><div><strong>Documentation</strong><span>SRS, reports, journals</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- GALLERY -->
+<section id="gallery" class="section">
+  <div class="wrap">
+    <p class="sec-tag reveal">Gallery</p>
+    <h2 class="sec-title reveal">Project &amp; Work Photos</h2>
+    <p class="sec-sub reveal">
+      Images related to my department, the IETP project, and software engineering work.
+      Replace these with your real photos as the project progresses.
+    </p>
+
+    <div class="gallery-grid reveal">
+      <div class="gal-item" onclick="lb('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&q=85','Coding — My daily SWE work')">
+        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&q=80" alt="Coding" />
+        <div class="gal-overlay"><span class="gal-caption">Coding — Daily SWE Work</span></div>
+      </div>
+      <div class="gal-item" onclick="lb('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=900&q=85','Solar Energy — Project Core')">
+        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=500&q=80" alt="Solar panels" />
+        <div class="gal-overlay"><span class="gal-caption">Solar Energy — Project Core</span></div>
+      </div>
+      <div class="gal-item" onclick="lb('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=85','Sensor Work — My Contribution')">
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80" alt="Sensor electronics" />
+        <div class="gal-overlay"><span class="gal-caption">Sensor Work — My Contribution</span></div>
+      </div>
+      <div class="gal-item" onclick="lb('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=85','Software Engineering Workspace')">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&q=80" alt="Engineering workspace" />
+        <div class="gal-overlay"><span class="gal-caption">SWE Workspace</span></div>
+      </div>
+      <div class="gal-item" onclick="lb('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=900&q=85','Writing Code')">
+        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500&q=80" alt="Writing code" />
+        <div class="gal-overlay"><span class="gal-caption">Writing Code</span></div>
+      </div>
+      <div class="gal-item" onclick="lb('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=85','Agriculture — Who We Are Helping')">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80" alt="Agriculture vegetables" />
+        <div class="gal-overlay"><span class="gal-caption">Agriculture — Who We Help</span></div>
+      </div>
+      <div class="gal-item" onclick="lb('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=900&q=85','Electronics & Microcontrollers')">
+        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=500&q=80" alt="Electronics microcontroller" />
+        <div class="gal-overlay"><span class="gal-caption">Electronics &amp; MCU</span></div>
+      </div>
+      <div class="gal-item" onclick="lb('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=900&q=85','Data Monitoring Code')">
+        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=500&q=80" alt="Code on screen" />
+        <div class="gal-overlay"><span class="gal-caption">Data Monitoring Code</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lb-bg" id="lbBg">
+  <button class="lb-close" onclick="closeLb()">✕</button>
+  <img src="" alt="" class="lb-img" id="lbImg" />
+  <div class="lb-caption" id="lbCap"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="wrap">
+    <p class="sec-tag reveal">Contact</p>
+    <h2 class="sec-title reveal">Get In Touch</h2>
+    <div class="contact-grid">
+      <div class="reveal">
+        <p style="color:var(--text2);font-size:.95rem">
+          I'm <strong style="color:var(--text)">Addisalem Mengistu</strong>, Software Engineering Student at AASTU.
+          Feel free to reach out about the IETP project or anything else.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:your.email@example.com" class="clink">
+            <span class="clink-ico">📧</span>
+            <div><strong>Email</strong><span>your.email@example.com — update this</span></div>
+          </a>
+          <a href="https://github.com/" target="_blank" class="clink">
+            <span class="clink-ico">🐙</span>
+            <div><strong>GitHub</strong><span>github.com/yourusername — update this</span></div>
+          </a>
+          <a href="https://linkedin.com/" target="_blank" class="clink">
+            <span class="clink-ico">💼</span>
+            <div><strong>LinkedIn</strong><span>linkedin.com/in/yourusername — update this</span></div>
+          </a>
+          <div class="clink" style="cursor:default">
+            <span class="clink-ico">🎓</span>
+            <div><strong>University</strong><span>AASTU — Department of Software Engineering</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="cform">
+          <h3>Send a Message</h3>
+          <form onsubmit="submitForm(event)">
+            <div class="fg"><label class="fl">Name</label><input type="text" class="fi" placeholder="Your name" required /></div>
+            <div class="fg"><label class="fl">Email</label><input type="email" class="fi" placeholder="Your email" required /></div>
+            <div class="fg"><label class="fl">Message</label><textarea class="fta" placeholder="Your message..." required></textarea></div>
+            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send Message ✈</button>
+          </form>
+          <div class="fsuccess" id="fsuccess">✅ Thanks! Connect a backend to enable real sending.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap footer-inner">
+    <p>© 2026 Addisalem Mengistu — AASTU Software Engineering · IETP 2026/2027</p>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#project">Project</a>
+      <a href="#role">My Role</a>
+      <a href="#journal">Journal</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<!-- JOURNAL MODAL -->
+<div class="modal-bg" id="jModal">
+  <div class="modal-box">
+    <button class="mclose" onclick="closeModal()">✕</button>
+    <h2 id="mTitle">Add This Week's Update</h2>
+    <form id="jForm" onsubmit="saveEntry(event)">
+      <input type="hidden" id="eId" />
+      <div class="mrow">
+        <div class="fg">
+          <label class="fl">Week #</label>
+          <input type="number" id="fWeek" class="fi" placeholder="e.g. 4" min="1" required />
+        </div>
+        <div class="fg">
+          <label class="fl">Date</label>
+          <input type="text" id="fDate" class="fi" placeholder="e.g. Nov 14, 2026" required />
+        </div>
+      </div>
+      <div class="fg">
+        <label class="fl">Entry Title</label>
+        <input type="text" id="fTitle" class="fi" placeholder="e.g. First design review meeting" required />
+      </div>
+
+      <div class="modal-divider">🎯 Coordinator Actions</div>
+      <div class="fg">
+        <label class="fl">What I Did as Team Coordinator</label>
+        <textarea id="fCoord" class="fta" placeholder="e.g. Ran the team meeting, assigned tasks to each discipline, updated the shared document..."></textarea>
+      </div>
+
+      <div class="modal-divider">💻 Software Engineering Contribution</div>
+      <div class="fg">
+        <label class="fl">What I Did as Software Engineer</label>
+        <textarea id="fSwe" class="fta" placeholder="e.g. Researched DHT22 sensors, wrote a draft of the software requirements..."></textarea>
+      </div>
+
+      <div class="modal-divider">📚 Reflection</div>
+      <div class="fg">
+        <label class="fl">What I Learned This Week</label>
+        <textarea id="fLearn" class="fta" placeholder="New knowledge, skills, or insights..."></textarea>
+      </div>
+      <div class="fg">
+        <label class="fl">Challenges I Faced</label>
+        <textarea id="fChall" class="fta" placeholder="Any difficulties or unexpected problems..."></textarea>
+      </div>
+      <div class="fg">
+        <label class="fl">My Plan for Next Week</label>
+        <textarea id="fNext" class="fta" placeholder="What I intend to work on next..."></textarea>
+      </div>
+
+      <div class="mactions">
+        <button type="button" class="btn btn-outline btn-sm" onclick="closeModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary btn-sm">Save Entry</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
